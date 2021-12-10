@@ -80,14 +80,10 @@ local function maxGrow(heights, pos)
     while true do
         local newPos = {}
         sizeChange = 0
-        for index, value in pairs(candidatesToGrow) do
-            print('candidate', value[1], value[2])
-        end
         for _, can in pairs(candidatesToGrow) do
             if (basin[can[1]] == nil or basin[can[1]][can[2]] ~= true) and
                 heights[can[2]] ~= nil and heights[can[2]][can[1]] ~= nil and
                 heights[can[2]][can[1]] < 9 then
-                print('added', can[1], can[2])
                 sizeChange = sizeChange + 1
                 size = size + 1
                 table.insert(newPos, {can[1], can[2]})
@@ -95,7 +91,6 @@ local function maxGrow(heights, pos)
                 basin[can[1]][can[2]] = true
             end
         end
-        print('sizeChange', sizeChange)
         if sizeChange == 0 then break end
         candidatesToGrow = getCandidates(newPos)
     end
@@ -121,4 +116,4 @@ end
 print('-----------------------------------------------')
 print('example :', solveTask(io.lines('./example.txt')))
 
--- print('solution:', solveTask(io.lines('./input.txt')))
+print('solution:', solveTask(io.lines('./input.txt')))
